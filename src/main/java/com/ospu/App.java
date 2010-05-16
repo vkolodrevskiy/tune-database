@@ -8,8 +8,11 @@ import com.ospu.util.DatabaseConnection;
 import org.apache.log4j.Logger;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.swing.*;
 
 /**
@@ -23,14 +26,12 @@ public class App {
      */
     private static final Logger logger = Logger.getLogger(App.class);
 
-    private static final String password = "123";
-
     private static Connection testingDBconnection;
     private static Connection applicationDBConnection;
 
     /**
      * Add some other components.
-     * 
+     *
      * @param pane where to add components.
      */
     public static void addComponentsToPane(Container pane) {
@@ -58,7 +59,7 @@ public class App {
 
     /**
      * Creates frame menu.
-     * 
+     *
      * @param frame frame to which add menu.
      */
     public static void addMenu(final JFrame frame) {
@@ -75,6 +76,9 @@ public class App {
                 System.exit(0);
             }
         };
+
+        // get root password.
+        final String password = getPassword();
 
         Action stopAction = new AbstractAction("Stop") {
             @Override
@@ -175,6 +179,26 @@ public class App {
         frame.setVisible(true);
     }
 
+    /**
+     * Reads user password from application.properties file.
+     * @return user password.
+     */
+    private static String getPassword() {
+        try {
+            final Properties props = new Properties();
+            final FileInputStream in = new FileInputStream("application.properties");
+            props.load(in);
+            in.close();
+
+            return props.getProperty("root.password");
+        } catch (final IOException e) {
+            logger.error("Can not read user password; " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
