@@ -1,16 +1,18 @@
 package com.ospu.constant;
 
 /**
- * FIXME: add description.
+ * Represents relation between column and table.
+ * Example: <code>student.name</code>. <br><br>
+ * <code>student</code> - <code>TableAndColumn.table</code> property.<br>
+ * <code>name</code> - <code>TableAndColumn.name</code> property.
  *
  * @author vkolodrevskiy
- *         To change this template use File | Settings | File Templates.
  */
 public class TableAndColumn {
-
     private String table;
     private String column;
 
+    // ------------------------------------------------------------------------
     public TableAndColumn(String table, String column) {
         this.table = table;
         this.column = column;
