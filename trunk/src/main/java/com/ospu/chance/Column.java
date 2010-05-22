@@ -6,7 +6,7 @@ package com.ospu.chance;
  * @author vkolodrevskiy
  */
 public class Column {
-    // FIXME: need to define if I need this
+    // column(table attribute) name
     private String name;
 
     private double selectChance;

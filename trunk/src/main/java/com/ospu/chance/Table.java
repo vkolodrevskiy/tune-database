@@ -8,14 +8,13 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public class Table {
-    // FIXME: need to define if I need this
+    // table name
     private String name;
 
     private double selectChance;
     private double updateChance;
     private double deleteChance;
     private double insertChance;
-    //private Map<String, Column> columns;
     private List<Column> columns; 
 
     // ------------------------------------------------------------------------
