@@ -3,12 +3,8 @@ package com.ospu.scale;
 import com.ospu.chance.Column;
 import com.ospu.chance.Table;
 import com.ospu.template.QueryType;
-import com.ospu.scale.exception.ColumnNotFoundException;
-import com.ospu.scale.exception.TableNotFoundException;
 import org.apache.log4j.Logger;
-
 import java.util.*;
-
 import static com.ospu.template.QueryType.*;
 
 /**
@@ -18,11 +14,11 @@ import static com.ospu.template.QueryType.*;
  *
  * @author vkolodrevskiy
  */
-public class ScaleManager {
+public class TemplateElementsScaleManager {
     /*
      * log4j audit channel
      */
-    private static final Logger logger = Logger.getLogger(ScaleManager.class);
+    private static final Logger logger = Logger.getLogger(TemplateElementsScaleManager.class);
 
     private Scale tableSelectScale;
     private Scale tableInsertScale;
@@ -34,7 +30,7 @@ public class ScaleManager {
     private Map<String, Scale> columnUpdateScale;
     private Map<String, Scale> columnDeleteScale;
 
-    public ScaleManager(List<Table> tables) {
+    public TemplateElementsScaleManager(List<Table> tables) {
         tableSelectScale = createTableScale(SELECT, tables);
         tableInsertScale = createTableScale(INSERT, tables);
         tableUpdateScale = createTableScale(UPDATE, tables);
@@ -54,7 +50,6 @@ public class ScaleManager {
             }
         }
     }
-
 
     public String getTable(QueryType queryType, double chance) /*throws TableNotFoundException*/ {
         Random r = new Random();
@@ -208,7 +203,6 @@ public class ScaleManager {
      */
     private Scale createTableScale(QueryType type, List<Table> tables) {
         Scale scale = new Scale();
-        scale.setQueryType(type);
 
         List<ScaleElement> scaleElements = new ArrayList<ScaleElement>();
         double next = 0;
@@ -223,7 +217,6 @@ public class ScaleManager {
                 case DELETE: next = next + t.getDeleteChance(); break;
             }
             element.setEnd(next);
-            element.setType(ScaleElementType.TABLE);
 
             scaleElements.add(element);
         }
@@ -243,7 +236,6 @@ public class ScaleManager {
         //    throw new ColumnNotFoundException("Columns collection is empty");
 
         Scale scale = new Scale();
-        scale.setQueryType(type);
 
         List<ScaleElement> scaleElements = new ArrayList<ScaleElement>();
         double next = 0;
@@ -258,7 +250,6 @@ public class ScaleManager {
                 case DELETE: next = next + a.getDeleteChance(); break;
             }
             element.setEnd(next);
-            element.setType(ScaleElementType.COLUMN);
 
             scaleElements.add(element);
         }

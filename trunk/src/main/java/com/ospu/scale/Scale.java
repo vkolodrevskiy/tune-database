@@ -1,6 +1,5 @@
 package com.ospu.scale;
 
-import com.ospu.template.QueryType;
 import java.util.List;
 
 /**
@@ -11,18 +10,9 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public class Scale {
-    private QueryType queryType;
     private List<ScaleElement> elements;
 
     // ------------------------------------------------------------------------
-    public QueryType getQueryType() {
-        return queryType;
-    }
-
-    public void setQueryType(final QueryType queryType) {
-        this.queryType = queryType;
-    }
-
     public List<ScaleElement> getElements() {
         return elements;
     }

@@ -6,7 +6,6 @@ package com.ospu.scale;
  * @author vkolodrevskiy
  */
 public class ScaleElement {
-    private ScaleElementType type;
     private String name;
     private double start;
     private double end;
@@ -35,13 +34,5 @@ public class ScaleElement {
 
     public void setEnd(final double end) {
         this.end = end;
-    }
-
-    public ScaleElementType getType() {
-        return type;
-    }
-
-    public void setType(final ScaleElementType type) {
-        this.type = type;
     }
 }

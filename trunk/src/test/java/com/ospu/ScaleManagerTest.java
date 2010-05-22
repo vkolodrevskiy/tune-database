@@ -1,9 +1,7 @@
 package com.ospu;
 
 import com.ospu.chance.Table;
-import com.ospu.scale.Scale;
-import com.ospu.scale.ScaleManager;
-import com.ospu.scale.exception.TableNotFoundException;
+import com.ospu.scale.TemplateElementsScaleManager;
 import com.ospu.template.QueryType;
 import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Unit tests for {@link ScaleManager}.
+ * Unit tests for {@link com.ospu.scale.TemplateElementsScaleManager}.
  *
  * @author vkolodrevskiy
  */
@@ -40,7 +38,7 @@ public class ScaleManagerTest {
             t3.setSelectChance(0.7);
         tables.add(t3);
 
-        ScaleManager manager = new ScaleManager(tables);
+        TemplateElementsScaleManager manager = new TemplateElementsScaleManager(tables);
         //Scale s1 = manager.createTableScaleForSelect(tables);
 
         //assert (s1.getElements().size() == 3) : "3 elements expected in the scale";
