@@ -1,6 +1,5 @@
 package com.ospu.constant;
 
-import com.ospu.util.DatabaseConnection;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -34,6 +33,9 @@ public class DatabaseConstantGenerator {
     // ------------------------------------------------------------------------
     public Object generate(TableAndColumn tableAndColumn) {
         // FIXME: load all data in constructor once;
+
+        // reads first <code>LIMIT</code> records from the given table.column
+        // returns randomly one of the records.
 
         String selectQuery = "SELECT " + tableAndColumn.getColumn() + " FROM "
                 + tableAndColumn.getTable() +" LIMIT " + LIMIT;

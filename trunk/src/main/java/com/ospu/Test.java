@@ -21,7 +21,7 @@ public class Test {
 
         //generator.generate(new TableAndColumn("statistica", "start_time"));
         ConstantGenerator gen = new ConstantGenerator();
-        gen.generate(new TableAndColumn("templates", "id_tem"));
+        //gen.generate(new TableAndColumn("templates", "id_tem"));
 
         System.out.println("");
 

@@ -44,7 +44,9 @@ public class TestResultsPanel extends JPanel {
                     JScrollPane scrollPane;
                     stat = applicationDBConnection.createStatement();
                     rs = stat.executeQuery("SELECT name AS \"имя теста\", " +
-                                           "duration AS \"длительность(мс)\", execution_date AS \"дата\" FROM result \n" +
+                                           "duration AS \"общая длительность теста(мс)\", " +
+                                           "average AS \"средняя длительность запроса(мс)\", " +
+                                           "execution_date AS \"дата\" FROM result \n" +
                                            "JOIN test \n" +
                                            "ON test.id=result.test_id\n" +
                                            "ORDER BY execution_date DESC");
@@ -67,7 +69,9 @@ public class TestResultsPanel extends JPanel {
             JScrollPane scrollPane;
             stat = applicationDBConnection.createStatement();
             rs = stat.executeQuery("SELECT name AS \"имя теста\", " +
-                    "duration AS \"длительность(мс)\", execution_date AS \"дата\" FROM result \n" +
+                    "duration AS \"общая длительность теста(мс)\", " +
+                    "average AS \"средняя длительность запроса(мс)\", " +
+                    "execution_date AS \"дата\" FROM result \n" +
                     "JOIN test \n" +
                     "ON test.id=result.test_id\n" +
                     "ORDER BY execution_date DESC");

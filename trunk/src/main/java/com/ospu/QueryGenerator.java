@@ -27,7 +27,13 @@ public class QueryGenerator {
         templates = parser.parse(templateStrings);
     }
 
-    public List<String> generate() {
+    /**
+     * Generates queries for the given collection of templates and template chances.
+     * 
+     * @param useDatabase defines whether database constants are used or not
+     * @return collection of generated queries.
+     */
+    public List<String> generate(boolean useDatabase) {
         Random random = new Random();
 
         List<String> result = new ArrayList<String>();
@@ -64,13 +70,15 @@ public class QueryGenerator {
             ConstantGenerator gen = new ConstantGenerator();
             template.getConstants();
             for(String constant: template.getConstants()) {
+
+                // suggest randomly which constant belongs to which column
                 TableAndColumn c = tableAndColumns.get(random.nextInt(tableAndColumns.size()));
 
-                if(gen.generate(c) == null)
+                if(gen.generate(c, useDatabase) == null) // if problem occured while constant generation
                     template.setTemplateString(template.getTemplateString().replace(constant, "null"));
                 else {
-                    String constant2replace = gen.generate(c).toString();
-                    template.setTemplateString(template.getTemplateString().replace(constant, "\'" + constant2replace) + "\'");
+                    String constant2replace = gen.generate(c, useDatabase).toString();
+                    template.setTemplateString(template.getTemplateString().replace(constant, "\'" + constant2replace + "\'"));
                 }
             }
 

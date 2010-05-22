@@ -73,26 +73,31 @@ public class RunTestThread extends Thread {
             logger.error(e.getMessage());
         }
 
-        saveResults(testName, duration);
+        // average time of each query
+        long average = duration/ templates.size();
+
+        saveResults(testName, duration, average);
     }
 
     /**
      * Save test results to 'result' table.
      *
      * @param testName test name.
+     * @param average average time of each query.
      * @param duration test duration time.
      */
-    public void saveResults(String testName, long duration) {
+    public void saveResults(final String testName, final long duration, final long average) {
         Connection connection = DatabaseConnection.getConnectionToApplicationDatabase();
 
         try {
-            String templatesQuery = "INSERT INTO result(test_id, duration, execution_date) " +
-                                    "VALUES ((SELECT id FROM test WHERE test.name = ?), ?, ?)";
+            String templatesQuery = "INSERT INTO result(test_id, duration, average, execution_date) " +
+                                    "VALUES ((SELECT id FROM test WHERE test.name = ?), ?, ?, ?)";
 
             PreparedStatement templatesQueryStat = connection.prepareStatement(templatesQuery);
             templatesQueryStat.setString(1, testName);
             templatesQueryStat.setLong(2, duration);
-            templatesQueryStat.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            templatesQueryStat.setLong(3, average);
+            templatesQueryStat.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 
             templatesQueryStat.executeUpdate();
             templatesQueryStat.close();
