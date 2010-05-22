@@ -18,23 +18,34 @@ public class ConstantGenerator {
         this.randomConstantGenerator = new RandomConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
     }
 
-    public Object generate(TableAndColumn tableAndColumn) {
-        double random = Math.random();
+    // ------------------------------------------------------------------------
+    /**
+     * Generates constant for the given table column.
+     *
+     * @param tableAndColumn table column for which to generate constant value.
+     * @param useDatabase defines whether to take constants from the database.
+     * @return result constant.
+     */
+    public Object generate(TableAndColumn tableAndColumn, boolean useDatabase) {
+        final double random = Math.random();
 
-        Object databaseConstant;
-        Object randomConstant;
+        final Object databaseConstant;
+        final Object randomConstant;
 
-        if(random < 0.5) {
-            databaseConstant = databaseConstantGenerator.generate(tableAndColumn);
-            if(databaseConstant == null)
-                return randomConstantGenerator.generate(tableAndColumn);
-            else return databaseConstant;
+        if(useDatabase) {
+            if(random < 0.5) { // take constant from database
+                databaseConstant = databaseConstantGenerator.generate(tableAndColumn);
+                if(databaseConstant == null)
+                    return randomConstantGenerator.generate(tableAndColumn);
+                else return databaseConstant;
+            }
+            else { // generate randomly. if could not generate try to take constant from database
+                randomConstant = randomConstantGenerator.generate(tableAndColumn);
+                if(randomConstant == null)
+                    return databaseConstantGenerator.generate(tableAndColumn);
+                else return randomConstant;
+            }
         }
-        else {
-            randomConstant = randomConstantGenerator.generate(tableAndColumn);
-            if(randomConstant == null)
-                return databaseConstantGenerator.generate(tableAndColumn);
-            else return randomConstant;
-        }
+        else return randomConstantGenerator.generate(tableAndColumn);
     }
 }

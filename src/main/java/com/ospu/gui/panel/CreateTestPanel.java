@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
  * @author vkolodrevskiy
  */
 public class CreateTestPanel extends JPanel {
-   /*
+    /*
     * log4j audit channel
     */
     private static final Logger logger = Logger.getLogger(CreateTestPanel.class);
@@ -30,12 +30,12 @@ public class CreateTestPanel extends JPanel {
         panel = this;
 
         setLayout(null);
-        JLabel lab1 = new JLabel("Создание нового теста(набора шаблонов):");
+        JLabel lab1 = new JLabel("Создание нового теста:");
         lab1.setBounds(10, 10, 400, 25);
         add(lab1);
 
-        JLabel lab2 = new JLabel("Уже имеющиеся в базе шаблоны:");
-        lab2.setBounds(10, 110, 400, 25);
+        JLabel lab2 = new JLabel("Уже имеющиеся в базе тесты:");
+        lab2.setBounds(10, 170, 400, 25);
         add(lab2);
 
         JLabel jlTestName = new JLabel("Имя теста:");
@@ -51,11 +51,27 @@ public class CreateTestPanel extends JPanel {
         add(jlLogFile);
 
         final JTextField jtfLogFile = new JTextField();
-        jtfLogFile.setBounds(130, 75, 140, 25);
+        jtfLogFile.setBounds(130, 75, 260, 25);
         add(jtfLogFile);
 
+        JLabel jlTestQuantity = new JLabel("Число запросов:");
+        jlTestQuantity.setBounds(10, 110, 130, 25);
+        add(jlTestQuantity);
+
+        final JTextField jtfTestQuantity = new JTextField();
+        jtfTestQuantity.setBounds(130, 110, 140, 25);
+        add(jtfTestQuantity);
+
+        JLabel jlTimeInterval = new JLabel("Интервал(мс):");
+        jlTimeInterval.setBounds(280, 40, 130, 25);
+        add(jlTimeInterval);
+
+        final JTextField jtfTimeInterval = new JTextField();
+        jtfTimeInterval.setBounds(400, 40, 140, 25);
+        add(jtfTimeInterval);
+
         JButton jbBrowseLogFile = new JButton("Обзор...");
-        jbBrowseLogFile.setBounds(280, 75, 100, 25);
+        jbBrowseLogFile.setBounds(400, 75, 100, 25);
         jbBrowseLogFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +84,7 @@ public class CreateTestPanel extends JPanel {
         add(jbBrowseLogFile);
 
         JButton jbCreateTemplates = new JButton("Добавить в базу");
-        jbCreateTemplates.setBounds(400, 75, 160, 25);
+        jbCreateTemplates.setBounds(10, 140, 160, 25);
         jbCreateTemplates.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,7 +95,7 @@ public class CreateTestPanel extends JPanel {
         add(jbCreateTemplates);
 
         JButton jbUpdateTable = new JButton("Обновить");
-        jbUpdateTable.setBounds(10, 140, 170, 25);
+        jbUpdateTable.setBounds(10, 200, 170, 25);
         jbUpdateTable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +105,7 @@ public class CreateTestPanel extends JPanel {
                     ResultSetTableModel model;
                     stat = applicationDBconnection.createStatement();
                     rs = stat.executeQuery("SELECT template AS \"шаблон\", name AS \"имя теста\" FROM template\n" +
-                                           "JOIN test\n" + "ON test.id=template.test_id");
+                            "JOIN test\n" + "ON test.id=template.test_id");
                     model = new CachingResultSetTableModel(rs);
 
                     table.setModel(model);
@@ -116,7 +132,7 @@ public class CreateTestPanel extends JPanel {
 
             scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                     ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-            scrollPane.setBounds(10, 170, 880, 445);
+            scrollPane.setBounds(10, 230, 880, 385);
 
             add(scrollPane);
 

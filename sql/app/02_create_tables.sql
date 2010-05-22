@@ -37,6 +37,8 @@ CREATE TABLE result (
    test_id                    bigint NOT NULL,
    -- test duration time in ms
    duration                   bigint NOT NULL,
+   -- average time of each query in ms
+   average                    bigint NOT NULL,
    -- when test was run
    execution_date             timestamp NOT NULL,
 
