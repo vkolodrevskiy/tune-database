@@ -3,11 +3,11 @@ package com.ospu;
 import com.ospu.chance.Table;
 import com.ospu.constant.ConstantGenerator;
 import com.ospu.constant.TableAndColumn;
+import com.ospu.scale.TemplateElementsScaleManager;
 import com.ospu.template.Column;
 import com.ospu.template.QueryType;
 import com.ospu.template.Template;
 import com.ospu.template.TemplateParser;
-import com.ospu.scale.ScaleManager;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class QueryGenerator {
         List<String> result = new ArrayList<String>();
 
         // create table scales
-        ScaleManager scaleManager = new ScaleManager(chances);
+        TemplateElementsScaleManager templateElementsScaleManager = new TemplateElementsScaleManager(chances);
 
         //
         for(Template template: templates) {
@@ -50,7 +50,7 @@ public class QueryGenerator {
             Map<String, String> replacedTablesMap = new HashMap<String, String>();
             for(String table: template.getTables()) {
                 double randomTable = Math.random();
-                String table2replace = scaleManager.getTable(queryType, randomTable);
+                String table2replace = templateElementsScaleManager.getTable(queryType, randomTable);
                 template.setTemplateString(template.getTemplateString().replace(table, table2replace));
                 replacedTablesMap.put(table, table2replace);
 
@@ -61,7 +61,7 @@ public class QueryGenerator {
             List<TableAndColumn> tableAndColumns = new ArrayList<TableAndColumn>();
             for(Column column: template.getColumns()) {
                 double randomColumn = Math.random();
-                String column2replace = scaleManager.getColumn(queryType, replacedTablesMap.get(column.getTable()), randomColumn);
+                String column2replace = templateElementsScaleManager.getColumn(queryType, replacedTablesMap.get(column.getTable()), randomColumn);
                 template.setTemplateString(template.getTemplateString().replace(column.getName(), column2replace));
 
                 tableAndColumns.add(new TableAndColumn(tables.get(random.nextInt(tables.size())), column2replace));
