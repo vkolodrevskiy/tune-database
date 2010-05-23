@@ -29,7 +29,7 @@ public class QueryGenerator {
 
     /**
      * Generates queries for the given collection of templates and template chances.
-     * 
+     *
      * @param useDatabase defines whether database constants are used or not
      * @return collection of generated queries.
      */
@@ -62,9 +62,21 @@ public class QueryGenerator {
             for(Column column: template.getColumns()) {
                 double randomColumn = Math.random();
                 String column2replace = templateElementsScaleManager.getColumn(queryType, replacedTablesMap.get(column.getTable()), randomColumn);
+                String table = tables.get(random.nextInt(tables.size()));
+
+                // try to replace with a different column(avoid duplicates)
+                if(isDuplicateColumn(tableAndColumns, table, column2replace)) {
+                    for(int i=0; i< 15; i++) {
+                        randomColumn = Math.random();
+                        column2replace = templateElementsScaleManager.getColumn(queryType, replacedTablesMap.get(column.getTable()), randomColumn);
+                        if(!isDuplicateColumn(tableAndColumns, table, column2replace))
+                            break;
+                    }
+                }
+
                 template.setTemplateString(template.getTemplateString().replace(column.getName(), column2replace));
 
-                tableAndColumns.add(new TableAndColumn(tables.get(random.nextInt(tables.size())), column2replace));
+                tableAndColumns.add(new TableAndColumn(table, column2replace));
             }
 
             ConstantGenerator gen = new ConstantGenerator();
@@ -86,5 +98,15 @@ public class QueryGenerator {
         }
 
         return result;
+    }
+
+    // ------------------------------------------------------------------------
+    private boolean isDuplicateColumn(List<TableAndColumn> tableAndColumns, String table, String column) {
+        for(TableAndColumn tac: tableAndColumns) {
+            if(tac.getColumn().equals(column) && tac.getTable().equals(table)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
