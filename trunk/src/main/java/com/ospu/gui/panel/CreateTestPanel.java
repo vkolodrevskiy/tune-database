@@ -104,8 +104,8 @@ public class CreateTestPanel extends JPanel {
                     ResultSet rs;
                     ResultSetTableModel model;
                     stat = applicationDBconnection.createStatement();
-                    rs = stat.executeQuery("SELECT template AS \"шаблон\", name AS \"имя теста\" FROM template\n" +
-                            "JOIN test\n" + "ON test.id=template.test_id");
+                    rs = stat.executeQuery("SELECT query AS \"запрос\", name AS \"имя теста\" FROM query\n" +
+                            "JOIN test\n" + "ON test.id=query.test_id");
                     model = new CachingResultSetTableModel(rs);
 
                     table.setModel(model);
@@ -124,8 +124,8 @@ public class CreateTestPanel extends JPanel {
             ResultSetTableModel model;
             JScrollPane scrollPane;
             stat = applicationDBconnection.createStatement();
-            rs = stat.executeQuery("SELECT template AS \"шаблон\", name AS \"имя теста\" FROM template\n" +
-                    "JOIN test\n" + "ON test.id=template.test_id");
+            rs = stat.executeQuery("SELECT query AS \"запрос\", name AS \"имя теста\" FROM query\n" +
+                    "JOIN test\n" + "ON test.id=query.test_id");
             model = new CachingResultSetTableModel(rs);
 
             table = new JTable(model);
