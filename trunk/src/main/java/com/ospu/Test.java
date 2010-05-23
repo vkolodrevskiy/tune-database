@@ -4,6 +4,10 @@ import com.ospu.constant.ConstantGenerator;
 import com.ospu.constant.RandomConstantGenerator;
 import com.ospu.constant.TableAndColumn;
 import com.ospu.util.DatabaseConnection;
+import com.ospu.validator.QueryValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * FIXME: add description.
@@ -20,9 +24,22 @@ public class Test {
         //RandomConstantGenerator generator = new RandomConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
 
         //generator.generate(new TableAndColumn("statistica", "start_time"));
-        ConstantGenerator gen = new ConstantGenerator();
+        //ConstantGenerator gen = new ConstantGenerator();
         //gen.generate(new TableAndColumn("templates", "id_tem"));
 
+        /*List<String> testQueries = new ArrayList<String>();
+        testQueries.add("select address, phone from address;");
+        testQueries.add("select district from address;");
+        testQueries.add("delete from film where length = '48';");
+        testQueries.add("INSERT INTO film (title, length, description) VALUES ('85', '3fdcb49cde665762', '3fc29c5b4fa09024');");
+        testQueries.add("UPDATE actor SET actor_id='1', last_name='3fe0a2e2ad3a0929' WHERE last_name='85';");
+        testQueries.add("update customer set store_id = (select store_id from customer where first_name = '3fd8ff6ceaea99a6') last_name = (select last_name from customer where first_name = '3fd8ff6ceaea99a6') where first_name = 'KELLY';");
+
+        List<String> result = QueryValidator.validate(testQueries);
+
+        for(String s:result)
+            System.out.println(s);
+*/
         System.out.println("");
 
         //DatabaseConstantGenerator gen = new DatabaseConstantGenerator();

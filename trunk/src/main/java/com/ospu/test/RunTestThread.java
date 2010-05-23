@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.List;
 
 /**
- * Runs collection of templates in a thread.
+ * Runs collection of queries in a thread.
  *
  * @author vkolodrevskiy
  */
@@ -16,17 +16,17 @@ public class RunTestThread extends Thread {
     * log4j audit channel
     */
     private static final Logger logger = Logger.getLogger(RunTestThread.class);
-    private List<String> templates;
+    private List<String> queries;
     private String testName;
-    /* how long templates were run */
+    /* how long queries were run */
     private long duration;
 
     public long getDuration() {
         return duration;
     }
 
-    public RunTestThread(List<String> templates, String testName) {
-        this.templates = templates;
+    public RunTestThread(List<String> queries, String testName) {
+        this.queries = queries;
         this.testName = testName;
     }
 
@@ -45,12 +45,12 @@ public class RunTestThread extends Thread {
             return;
         }
 
-        for(String t: templates) {
+        for(String q: queries) {
             try {
-                stat.execute(t);
-                logger.debug("Run successfully template = " + t);
+                stat.execute(q);
+                logger.debug("Run successfully query = " + q);
             } catch (SQLException e) {
-                logger.error("Error running template = " + t + "; " + e.getMessage());
+                logger.error("Error running query = " + q + "; " + e.getMessage());
             }
         }
 
@@ -74,7 +74,7 @@ public class RunTestThread extends Thread {
         }
 
         // average time of each query
-        long average = duration/ templates.size();
+        long average = duration/ queries.size();
 
         saveResults(testName, duration, average);
     }
