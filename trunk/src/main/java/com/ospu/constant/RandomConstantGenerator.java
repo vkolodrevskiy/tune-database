@@ -2,6 +2,7 @@ package com.ospu.constant;
 
 import com.ospu.metadata.*;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Random;
 
@@ -19,13 +20,14 @@ public class RandomConstantGenerator {
     }
 
     // ------------------------------------------------------------------------
-    // FIXME: add generation for all types
+    // TODO: add generation for all data types
     public Object generate(TableAndColumn tableAndColumn) {
 
         String type = getColumnType(tableAndColumn);
 
         if(type == null) return null;
 
+        // numbers
         if(type.equals("int2")) {
             Random r = new Random();
             return r.nextInt(30000) + 1;
@@ -38,6 +40,14 @@ public class RandomConstantGenerator {
             Random r = new Random();
             return r.nextInt(30000) + 1;
         }
+        if(type.equals("year")) {
+            Random r = new Random();
+            return r.nextInt(2011) + 1;
+        }
+        if(type.equals("numeric")) {
+            Random r = new Random();
+            return r.nextDouble() + r.nextInt(100);
+        }
         if(type.equals("serial")) {
             Random r = new Random();
             return r.nextInt(30000) + 1;
@@ -46,15 +56,30 @@ public class RandomConstantGenerator {
             Random r = new Random();
             return r.nextInt(30000) + 1;
         }
+
+        // text
         if(type.equals("varchar")) {
             return Long.toHexString(Double.doubleToLongBits(Math.random()));
         }
         if(type.equals("text")) {
             return Long.toHexString(Double.doubleToLongBits(Math.random()));
         }
+        if(type.equals("bpchar")) {
+            return Long.toHexString(Double.doubleToLongBits(Math.random()));
+        }
+        
+        // time
         if(type.equals("timestamp")) {
             return new Timestamp(System.currentTimeMillis());
         }
+        if(type.equals("date")) {
+            return new Date(System.currentTimeMillis());
+        }
+        // boolean
+        if(type.equals("bool")) {
+            Random r = new Random();
+            return r.nextInt(2);
+        }        
 
         return null;
     }
