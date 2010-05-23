@@ -10,8 +10,6 @@ import static com.ospu.template.QueryType.*;
 /**
  * Manager for working with a scale.
  *
- * FIXME: make it singleton?
- *
  * @author vkolodrevskiy
  */
 public class TemplateElementsScaleManager {
@@ -51,7 +49,7 @@ public class TemplateElementsScaleManager {
         }
     }
 
-    public String getTable(QueryType queryType, double chance) /*throws TableNotFoundException*/ {
+    public String getTable(QueryType queryType, double chance) {
         Random r = new Random();
         switch (queryType) {
             case SELECT: {
@@ -101,11 +99,7 @@ public class TemplateElementsScaleManager {
 
             default: return null; // this should never happen I guess :)
         }
-
-//        throw new TableNotFoundException("Table with the given chance was not found in the scale; " +
-//                "chance = " + chance + " query type = " + queryType);
     }
-
 
     public String getColumn(QueryType queryType, String tableName, double chance) {
         Random r = new Random();
@@ -159,41 +153,6 @@ public class TemplateElementsScaleManager {
         }
     }
 
-
-//    public String getTable(Scale scale, double chance) throws TableNotFoundException {
-//        for(ScaleElement element: scale.getElements()) {
-//            if(chance > element.getStart() && chance <= element.getEnd())
-//                return element.getName();
-//        }
-//
-//        throw new TableNotFoundException("Table with the given chance was not found in the scale; chance = " + chance);
-//    }
-
-//    public Scale createColumnScaleForSelect(List<Column> columns) {
-//        return createColumnScale(SELECT, columns);
-//    }
-//
-//    public Scale createColumnScaleForInsert(List<Column> columns) {
-//        return createColumnScale(INSERT, columns);
-//    }
-//
-//    public Scale createColumnScaleForUpdate(List<Column> columns) {
-//        return createColumnScale(UPDATE, columns);
-//    }
-//
-//    public Scale createColumnScaleForDelete(List<Column> columns) {
-//        return createColumnScale(DELETE, columns);
-//    }
-//
-//    public String getColumn(Scale scale, double chance) throws ColumnNotFoundException {
-//        for(ScaleElement element: scale.getElements()) {
-//            if(chance > element.getStart() && chance <= element.getEnd())
-//                return element.getName();
-//        }
-//
-//        throw new ColumnNotFoundException("Column with the given chance was not found in the scale; chance = " + chance);
-//    }
-
     // ------------------------------------------------------------------------
     /**
      * Creates scale for tables.
@@ -227,14 +186,12 @@ public class TemplateElementsScaleManager {
 
     /**
      * Creates scale for tables.
+     *
      * @param type    template type.
      * @param columns table columns for which to create scale.
      * @return <code>Scale</code> object.
      */
-    private Scale createColumnScale(QueryType type, List<Column> columns) /*throws ColumnNotFoundException*/ {
-        //if(columns == null)
-        //    throw new ColumnNotFoundException("Columns collection is empty");
-
+    private Scale createColumnScale(QueryType type, List<Column> columns) {
         Scale scale = new Scale();
 
         List<ScaleElement> scaleElements = new ArrayList<ScaleElement>();
