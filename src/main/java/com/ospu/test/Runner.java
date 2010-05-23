@@ -19,21 +19,21 @@ public class Runner {
     * log4j audit channel
     */
     private static final Logger logger = Logger.getLogger(Runner.class);
-    private List<String> templates;
+    private List<String> queries;
     private String testName;
     private int numberOfThreads;
 
     public Runner(int numberOfThreads, String testName) {
         this.numberOfThreads = numberOfThreads;
         this.testName = testName;
-        templates = new ArrayList<String>();
+        queries = new ArrayList<String>();
 
-        // get templates from database.
+        // get queries from database.
         Connection connection = DatabaseConnection.getConnectionToApplicationDatabase();
         try {
             ResultSet rs;
-            String templatesQuery = "SELECT template FROM template\n" +
-                    "JOIN test ON test.id=template.test_id\n" +
+            String templatesQuery = "SELECT query FROM query\n" +
+                    "JOIN test ON test.id=query.test_id\n" +
                     "AND name = ?";
 
             PreparedStatement templatesQueryStat = connection.prepareStatement(templatesQuery);
@@ -42,7 +42,7 @@ public class Runner {
             rs = templatesQueryStat.executeQuery();
 
             while(rs.next()) {
-                templates.add(rs.getString(1));
+                queries.add(rs.getString(1));
             }
 
             rs.close();
@@ -54,7 +54,7 @@ public class Runner {
     }
 
     public void runTests() {
-        RunTestThread t1 = new RunTestThread(templates, testName);
+        RunTestThread t1 = new RunTestThread(queries, testName);
         // create ExecutorService to manage threads
         ExecutorService threadExecutor = Executors.newFixedThreadPool(5);
 

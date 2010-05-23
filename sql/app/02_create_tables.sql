@@ -4,17 +4,17 @@
 -- ****************************************************************************
 
 -- queries
-CREATE TABLE template (
+CREATE TABLE query (
    id                         bigserial NOT NULL,
 
-   template                   text NOT NULL,
+   query                      text NOT NULL,
    test_id                    bigint NOT NULL,
 
    PRIMARY KEY (id),
-   UNIQUE (template, test_id)
+   UNIQUE (query, test_id)
 ) ;
 
-COMMENT ON TABLE template IS
+COMMENT ON TABLE query IS
 'Contains sql queries.';
 
 -- tests
