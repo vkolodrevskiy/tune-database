@@ -3,7 +3,7 @@
 -- NOTE:  Must be connected to database 'testing_db'
 -- ****************************************************************************
 
--- templates
+-- queries
 CREATE TABLE template (
    id                         bigserial NOT NULL,
 
@@ -15,7 +15,7 @@ CREATE TABLE template (
 ) ;
 
 COMMENT ON TABLE template IS
-'Contains sql query templates.';
+'Contains sql queries.';
 
 -- tests
 CREATE TABLE test (
@@ -28,7 +28,7 @@ CREATE TABLE test (
 ) ;
 
 COMMENT ON TABLE test IS
-'Tests, one test contains many templates.';
+'Tests, one test contains many queries.';
 
 -- test results
 CREATE TABLE result (
