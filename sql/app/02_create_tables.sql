@@ -10,8 +10,7 @@ CREATE TABLE query (
    query                      text NOT NULL,
    test_id                    bigint NOT NULL,
 
-   PRIMARY KEY (id),
-   UNIQUE (query, test_id)
+   PRIMARY KEY (id)
 ) ;
 
 COMMENT ON TABLE query IS

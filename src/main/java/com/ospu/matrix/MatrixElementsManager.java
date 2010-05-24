@@ -1,6 +1,7 @@
-package com.ospu.scale;
+package com.ospu.matrix;
 
-import com.ospu.matrix.MatrixItem;
+import com.ospu.scale.Scale;
+import com.ospu.scale.ScaleElement;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -10,18 +11,18 @@ import java.util.*;
  *
  * @author vkolodrevskiy
  */
-public class MatrixElementsScaleManager {
+public class MatrixElementsManager {
     /*
      * log4j audit channel
      */
-    private static final Logger logger = Logger.getLogger(MatrixElementsScaleManager.class);
+    private static final Logger logger = Logger.getLogger(MatrixElementsManager.class);
 
     public static final String EMPTY_STATE = "empty state";
 
     private List<MatrixItem> items;
     private Map<String, Scale> elements;
 
-    public MatrixElementsScaleManager(List<MatrixItem> items) {
+    public MatrixElementsManager(List<MatrixItem> items) {
         this.items = items;
         elements = new HashMap<String, Scale>();
 

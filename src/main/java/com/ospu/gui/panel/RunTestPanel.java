@@ -17,14 +17,14 @@ import java.sql.Statement;
  * @author vkolodrevskiy
  */
 public class RunTestPanel extends JPanel {
-   /*
+    /*
     * log4j audit channel
     */
     private static final Logger logger = Logger.getLogger(RunTestPanel.class);
 
     private JComponent panel;
 
-    public RunTestPanel(Connection applicatioDBconnection) {
+    public RunTestPanel(final Connection applicatioDBconnection) {
         panel = this;
 
         setLayout(null);
@@ -50,6 +50,28 @@ public class RunTestPanel extends JPanel {
             logger.error(e.getMessage());
         }
         add(jcbSelectTest);
+
+        final JButton jbUpdateTable = new JButton("Обновить");
+        jbUpdateTable.setBounds(280, 40, 120, 25);
+        jbUpdateTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                jcbSelectTest.removeAllItems();
+                // add items
+                try {
+                    Statement stat;
+                    ResultSet rs;
+                    stat = applicatioDBconnection.createStatement();
+                    rs = stat.executeQuery("SELECT name FROM test");
+                    while(rs.next()) {
+                        jcbSelectTest.addItem(rs.getString(1));
+                    }
+                } catch (SQLException exc) {
+                    logger.error(exc.getMessage());
+                }
+            }
+        });
+        add(jbUpdateTable);
 
         final JComboBox jcbThreadNumber = new JComboBox();
         jcbThreadNumber.setBounds(130, 75, 140, 25);
