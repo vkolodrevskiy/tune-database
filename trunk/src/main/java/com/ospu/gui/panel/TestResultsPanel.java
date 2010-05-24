@@ -18,7 +18,7 @@ import java.sql.Statement;
  * @author vkolodrevskiy
  */
 public class TestResultsPanel extends JPanel {
-    /*
+   /*
     * log4j audit channel
     */
     private static final Logger logger = Logger.getLogger(TestResultsPanel.class);
@@ -33,7 +33,7 @@ public class TestResultsPanel extends JPanel {
         add(lab1);
 
         JButton jbUpdateTable = new JButton("Обновить");
-        jbUpdateTable.setBounds(10, 100, 170, 25);
+        jbUpdateTable.setBounds(10, 50, 170, 25);
         jbUpdateTable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,7 +41,6 @@ public class TestResultsPanel extends JPanel {
                     Statement stat;
                     ResultSet rs;
                     ResultSetTableModel model;
-                    JScrollPane scrollPane;
                     stat = applicationDBConnection.createStatement();
                     rs = stat.executeQuery("SELECT name AS \"имя теста\", " +
                                            "duration AS \"общая длительность теста(мс)\", " +
@@ -81,7 +80,7 @@ public class TestResultsPanel extends JPanel {
 
             scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                     ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-            scrollPane.setBounds(10, 130, 880, 485);
+            scrollPane.setBounds(10, 80, 880, 535);
 
             add(scrollPane);
 
