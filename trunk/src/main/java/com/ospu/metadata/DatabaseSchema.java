@@ -3,10 +3,9 @@ package com.ospu.metadata;
 import java.util.List;
 
 /**
- * FIXME: add description.
+ * Represents database schema.
  *
  * @author vkolodrevskiy
- *         To change this template use File | Settings | File Templates.
  */
 public class DatabaseSchema {
     private String name;

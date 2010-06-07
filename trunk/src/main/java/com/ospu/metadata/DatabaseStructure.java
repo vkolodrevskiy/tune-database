@@ -13,9 +13,6 @@ public class DatabaseStructure {
 
     /**
      * Returns schema specified by its name.
-     *
-     * @param schemaName
-     * @return
      */
     public DatabaseSchema getSchema(String schemaName) {
         for(DatabaseSchema s: schemas) {

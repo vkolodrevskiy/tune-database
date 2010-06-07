@@ -6,8 +6,10 @@ import com.ospu.constant.TableAndColumn;
 import com.ospu.util.DatabaseConnection;
 import com.ospu.validator.QueryValidator;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * FIXME: add description.
@@ -40,7 +42,11 @@ public class Test {
         for(String s:result)
             System.out.println(s);
 */
-        System.out.println("");
+
+        Random r = new Random();
+
+        for(int i=0; i<10;i++)
+            System.out.println(r.nextDouble() + r.nextInt(100));
 
         //DatabaseConstantGenerator gen = new DatabaseConstantGenerator();
 

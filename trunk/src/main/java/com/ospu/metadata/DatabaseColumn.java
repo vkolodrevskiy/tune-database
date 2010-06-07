@@ -1,10 +1,10 @@
 package com.ospu.metadata;
 
 /**
- * FIXME: add description.
+ * Represents database table column
+ * (table attribute).
  *
  * @author vkolodrevskiy
- *         To change this template use File | Settings | File Templates.
  */
 public class DatabaseColumn {
     private String name;
