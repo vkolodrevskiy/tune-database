@@ -1,7 +1,7 @@
 package com.ospu.template;
 
 /**
- * FIXME: add description.
+ * Represents table column.
  *
  * @author vkolodrevskiy
  */
@@ -10,7 +10,6 @@ public class Column {
     /* parent table name */
     private String table;
     /* column data type */
-    private ColumnType type;// FIXME: delete this property?
 
     // ------------------------------------------------------------------------
     // Setters and getters.
@@ -28,13 +27,5 @@ public class Column {
 
     public void setTable(final String table) {
         this.table = table;
-    }
-
-    public ColumnType getType() {
-        return type;
-    }
-
-    public void setType(final ColumnType type) {
-        this.type = type;
     }
 }

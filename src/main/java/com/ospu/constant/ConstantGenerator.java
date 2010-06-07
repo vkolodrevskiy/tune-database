@@ -14,8 +14,10 @@ public class ConstantGenerator {
     private RandomConstantGenerator randomConstantGenerator;
 
     public ConstantGenerator() {
-        this.databaseConstantGenerator = new DatabaseConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
-        this.randomConstantGenerator = new RandomConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
+        this.databaseConstantGenerator =
+                new DatabaseConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
+        this.randomConstantGenerator =
+                new RandomConstantGenerator(DatabaseConnection.getConnectionToTestingDatabase());
     }
 
     // ------------------------------------------------------------------------
